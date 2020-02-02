@@ -28,11 +28,10 @@ module.exports.update = (event, _context, callback) => {
   dynamoDb.update(params, (error, result) => {
     if (error) {
       console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { "Content-Type": "text/plain" },
-        body: "Couldn't fetch the book item." + error.message
-      });
+      callback(
+        null,
+        errorResponse(error.statusCode, "Unable to update book item.")
+      );
       return;
     }   
     callback(null, response(result.Attributes));

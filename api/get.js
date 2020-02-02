@@ -3,7 +3,6 @@ const { errorResponse, response } = require("./helpers/response");
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-
 module.exports.get = (event, _context, callback) => {
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
@@ -15,11 +14,10 @@ module.exports.get = (event, _context, callback) => {
   dynamoDb.get(params, (error, result) => {
     if (error) {
       console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { "Content-Type": "text/plain" },
-        body: "Couldn't fetch the book item."
-      });
+      callback(
+        null,
+        errorResponse(error.statusCode, "Unable to fetch book item.")
+      );
       return;
     }
 

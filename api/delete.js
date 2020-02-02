@@ -1,4 +1,5 @@
 const AWS = require("aws-sdk");
+const { errorResponse, response } = require("./helpers/response");
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -21,12 +22,7 @@ module.exports.delete = (event, _context, callback) => {
       return;
     }
 
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify({})
-    };
-
-    callback(null, response);
+    callback(null, response({}));
     return;
   });
 };

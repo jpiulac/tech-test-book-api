@@ -1,4 +1,5 @@
 const AWS = require("aws-sdk");
+const { errorResponse, response } = require("./helpers/response");
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -33,13 +34,7 @@ module.exports.update = (event, _context, callback) => {
         body: "Couldn't fetch the book item." + error.message
       });
       return;
-    }
-
-    // create a response
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify(result.Attributes)
-    };
-    callback(null, response);
+    }   
+    callback(null, response(result.Attributes));
   });
 };

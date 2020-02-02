@@ -1,5 +1,7 @@
 const uuid = require("uuid");
 const AWS = require("aws-sdk");
+const { errorResponse, response } = require("./helpers/response");
+
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -29,12 +31,7 @@ module.exports.create = (event, _context, callback) => {
       return;
     }
 
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify(params.Item)
-    };
-
-    callback(null, response);
+    callback(null, response(params.Item));
     return;
   });
 };

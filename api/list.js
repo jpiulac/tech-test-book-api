@@ -7,7 +7,7 @@ const params = {
 };
 
 module.exports.list = (_event, _context, callback) => {
-  dynamoDb.scan(params, (error, result) => {
+  return dynamoDb.scan(params, (error, result) => {
     if (error) {
       // eslint-disable-next-line no-console
       console.error(error);

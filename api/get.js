@@ -11,7 +11,7 @@ module.exports.get = (event, _context, callback) => {
     },
   };
 
-  dynamoDb.get(params, (error, result) => {
+  return dynamoDb.get(params, (error, result) => {
     if (error) {
       // eslint-disable-next-line no-console
       console.error(error);

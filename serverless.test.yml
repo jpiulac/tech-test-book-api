@@ -13,6 +13,18 @@
       name: a book
       authorName: an author
 
+- name: fails to create a book item (invalid)
+  endpoint:
+    method: POST
+    path: /books/add
+  request:
+    body:
+      foo: a book
+  response:
+    status: 400
+    body:
+      error: true
+
 - name: retrieves a book item by uuid
   endpoint:
     method: GET
@@ -38,6 +50,18 @@
       uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
       name: a different book
       authorName: a different author  
+
+- name: fails to updaye a book item (invalid)
+  endpoint:
+    method: POST
+    path: /books/add
+  request:
+    body:
+      foo: a book
+  response:
+    status: 400
+    body:
+      error: true
 
 - name: retrieves a book list (status 200)
   endpoint:

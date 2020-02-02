@@ -33,13 +33,13 @@ You can create, retrieve, update, or delete books with the following commands:
 ### Create a book
 
 ```bash
-curl -X POST https://XXXXXXX.execute-api.eu-west-1.amazonaws.com/dev/books/add --data '{ "name": "Serverless", "releasedDate": "Peter Pan", "releasedDate": 1580670021877 }'
+curl -X POST https://XXXXXXX.execute-api.eu-west-1.amazonaws.com/dev/books/add --data '{ "name": "Serverless", "releaseDate": "Peter Pan", "releaseDate": 1580670021877 }'
 ```
 
 Example Result:
 
 ```bash
-{"name": "Serverless","uuid":"ee6490d0-aa11e6-9ede-afdfa051af86","releasedDate": "Peter Pan", "releasedDate": 1580670021877}
+{"name": "Serverless","uuid":"ee6490d0-aa11e6-9ede-afdfa051af86","releaseDate": "Peter Pan", "releaseDate": 1580670021877}
 ```
 
 ### List all books
@@ -51,7 +51,7 @@ curl https://XXXXXXX.execute-api.eu-west-1.amazonaws.com/dev/books
 Example output:
 
 ```bash
-[{"uuid":"c3bc50a0-45e4-11ea-922f-09012ff1aa8c","releasedDate":1580665942698,"authorName":"an author","name":"a book"}]
+[{"uuid":"c3bc50a0-45e4-11ea-922f-09012ff1aa8c","releaseDate":1580665942698,"authorName":"an author","name":"a book"}]
 ```
 
 ### Get one book
@@ -64,20 +64,20 @@ curl https://XXXXXXX.execute-api.eu-west-1.amazonaws.com/dev/books/<uuid>
 Example Result:
 
 ```bash
-{"uuid":"c3bc50a0-45e4-11ea-922f-09012ff1aa8c","releasedDate":1580665942698,"authorName":"an author","name":"a book"}
+{"uuid":"c3bc50a0-45e4-11ea-922f-09012ff1aa8c","releaseDate":1580665942698,"authorName":"an author","name":"a book"}
 ```
 
 ### Update a book
 
 ```bash
 # Replace the <uuid> part with a real id from your books table
-curl -X POST https://XXXXXXX.execute-api.eu-west-1.amazonaws.com/dev/books/<id>/update --data '{ "name": "Learn Serverless", "authorName": "Peter P", "releasedDate": 1580665942698 }'
+curl -X POST https://XXXXXXX.execute-api.eu-west-1.amazonaws.com/dev/books/<id>/update --data '{ "name": "Learn Serverless", "authorName": "Peter P", "releaseDate": 1580665942698 }'
 ```
 
 Example Result:
 
 ```bash
-{ "name":"Learn Serverless","uuid":"ee6490d0-aa11e6-9ede-afdfa051af86","authorName": "Peter P", "releasedDate": 1580665942698 }
+{ "name":"Learn Serverless","uuid":"ee6490d0-aa11e6-9ede-afdfa051af86","authorName": "Peter P", "releaseDate": 1580665942698 }
 ```
 
 ### Delete a book

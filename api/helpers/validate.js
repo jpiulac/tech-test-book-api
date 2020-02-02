@@ -11,7 +11,7 @@ const validateBook = data => {
   if (data.authorName.trim().length === 0) {
     return false;
   }
-  if ('releasedDate' in data) {
+  if ('releaseDate' in data) {
     if (typeof data.releaseDate !== 'number') {
       return false;
     }

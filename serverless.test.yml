@@ -1,0 +1,54 @@
+- name: creates a book item
+  endpoint:
+    method: POST
+    path: /books/add
+  request:
+    body:
+      uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
+      name: a book
+      authorName: an author
+  response:
+    status: 200
+    body:
+      name: a book
+      authorName: an author
+
+- name: retrieves a book item by uuid
+  endpoint:
+    method: GET
+    path: /books/913aeec0-45e4-11ea-922f-09012ff1aa8c
+  response:
+    status: 200
+    body:
+      uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
+      name: a book
+      authorName: an author
+
+- name: updates a book item by uuid
+  endpoint:
+    method: POST
+    path: /books/913aeec0-45e4-11ea-922f-09012ff1aa8c/update
+  request:
+    body:
+      name: a different book
+      authorName: a different author  
+  response:
+    status: 200
+    body:
+      uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
+      name: a different book
+      authorName: a different author  
+
+- name: retrieves a book list (status 200)
+  endpoint:
+    method: GET
+    path: /books
+  response:
+    status: 200
+
+- name: delete endpoint (status 200)
+  endpoint:
+    method: POST
+    path: /books/913aeec0-45e4-11ea-922f-09012ff1aa8c/delete
+  response:
+    status: 200

@@ -1,0 +1,11 @@
+{
+  "name": "tech-test-book-api",
+  "version": "1.0.0",
+  "description": "Serverless CRUD service exposing a REST HTTP interface",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.610.0",
+    "uuid": "^3.4.0"
+  }
+}

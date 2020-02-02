@@ -1,6 +1,6 @@
-const uuid = require("uuid");
-const AWS = require("aws-sdk");
-const { errorResponse, response } = require("./helpers/response");
+const uuid = require('uuid');
+const AWS = require('aws-sdk');
+const { errorResponse, response } = require('./helpers/response');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -14,16 +14,17 @@ module.exports.create = (event, _context, callback) => {
       uuid: data.uuid || uuid.v1(),
       name: data.name,
       releasedDate: data.releasedDate || timestamp,
-      authorName: data.authorName
-    }
+      authorName: data.authorName,
+    },
   };
 
   dynamoDb.put(params, error => {
     if (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
       callback(
         null,
-        errorResponse(error.statusCode, "Unable to create book item.")
+        errorResponse(error.statusCode, 'Unable to create book item.')
       );
       return;
     }

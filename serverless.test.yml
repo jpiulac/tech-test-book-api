@@ -7,11 +7,13 @@
       uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
       name: a book
       authorName: an author
+      releaseDate: 1580680415138
   response:
     status: 200
     body:
       name: a book
       authorName: an author
+      releaseDate: 1580680415138
 
 - name: fails to create a book item (invalid)
   endpoint:
@@ -43,13 +45,15 @@
   request:
     body:
       name: a different book
-      authorName: a different author  
+      authorName: a different author 
+      releaseDate: 1580680415139 
   response:
     status: 200
     body:
       uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
       name: a different book
-      authorName: a different author  
+      authorName: a different author 
+      releaseDate: 1580680415139  
 
 - name: fails to updaye a book item (invalid)
   endpoint:

@@ -12,10 +12,10 @@ const validateBook = data => {
     return false;
   }
   if ('releasedDate' in data) {
-    if (typeof data.releasedDate !== 'number') {
+    if (typeof data.releaseDate !== 'number') {
       return false;
     }
-    if (!new Date(data.releasedDate).getTime() > 0) {
+    if (!new Date(data.releaseDate).getTime() > 0) {
       return false;
     }
   }

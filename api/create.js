@@ -19,7 +19,7 @@ module.exports.create = (event, _context, callback) => {
       // for testing we can pass a uuid
       uuid: data.uuid || uuid.v1(),
       name: data.name,
-      releasedDate: data.releasedDate || timestamp,
+      releaseDate: data.releaseDate || timestamp,
       authorName: data.authorName,
     },
   };

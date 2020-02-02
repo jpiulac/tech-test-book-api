@@ -22,11 +22,11 @@ module.exports.update = (event, _context, callback) => {
     },
     ExpressionAttributeValues: {
       ':name': data.name,
-      ':releasedDate': data.releasedDate || timestamp,
+      ':releaseDate': data.releaseDate || timestamp,
       ':authorName': data.authorName,
     },
     UpdateExpression:
-      'SET #book_name = :name, authorName = :authorName, releasedDate = :releasedDate',
+      'SET #book_name = :name, authorName = :authorName, releaseDate = :releaseDate',
     ReturnValues: 'ALL_NEW',
   };
 

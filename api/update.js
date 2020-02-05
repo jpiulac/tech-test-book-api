@@ -4,33 +4,67 @@ const validateBook = require('./helpers/validate');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports.update = (event, _context, callback) => {
-  const timestamp = new Date().getTime();
-  const data = JSON.parse(event.body);
-
-  if (!validateBook(data)) {
-    return callback(null, errorResponse('400', 'Invalid book item.'));
+const parseBody = event => {
+  try {
+    const data = JSON.parse(event.body || {});
+    return data;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Unable to parse json data');
+    return null;
   }
+};
 
+const updateExpression = (event, data) => {
+  const { name, authorName, releaseDate } = data;
+  const update = [];
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Key: {
       uuid: event.pathParameters.uuid,
     },
-    ExpressionAttributeNames: {
-      '#book_name': 'name',
-    },
-    ExpressionAttributeValues: {
-      ':name': data.name,
-      ':releaseDate': data.releaseDate || timestamp,
-      ':authorName': data.authorName,
-    },
-    UpdateExpression:
-      'SET #book_name = :name, authorName = :authorName, releaseDate = :releaseDate',
+    ExpressionAttributeValues: {},
+    UpdateExpression: null,
     ReturnValues: 'ALL_NEW',
   };
+  if (name) {
+    params.ExpressionAttributeNames = { '#book_name': 'name' };
+    params.ExpressionAttributeValues[':name'] = name;
+    update.push('#book_name = :name');
+  }
+  if (authorName) {
+    params.ExpressionAttributeValues[':authorName'] = authorName;
+    update.push('authorName = :authorName');
+  }
+  if (releaseDate) {
+    params.ExpressionAttributeValues[':releaseDate'] = releaseDate;
+    update.push('releaseDate = :releaseDate');
+  }
+  params.UpdateExpression = `SET ${update.join(', ')}`;
 
-  return dynamoDb.update(params, (error, result) => {
+  return params;
+};
+
+module.exports.update = (event, _context, callback) => {
+  if (!event.body) {
+    callback(
+      null,
+      errorResponse('400', 'Invalid request for update book item.')
+    );
+    return;
+  }
+
+  const data = parseBody(event);
+  if (!data) {
+    callback(null, errorResponse('400', 'Invalid request body.'));
+    return;
+  }
+  if (!validateBook(data)) {
+    callback(null, errorResponse('400', 'Invalid book item.'));
+    return;
+  }
+  const params = updateExpression(event, data);
+  dynamoDb.update(params, (error, result) => {
     if (error) {
       // eslint-disable-next-line no-console
       console.error(error);

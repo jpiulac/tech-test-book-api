@@ -54,8 +54,36 @@
       name: a different book
       authorName: a different author 
       releaseDate: 1580680415139  
+    
+- name: updates a book (name) by uuid
+  endpoint:
+    method: POST
+    path: /books/913aeec0-45e4-11ea-922f-09012ff1aa8c/update
+  request:
+    body:
+      name: a book name
+  response:
+    status: 200
+    body:
+      uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
+      name: a book name
 
-- name: fails to updaye a book item (invalid)
+- name: updates a book (no name) by uuid
+  endpoint:
+    method: POST
+    path: /books/913aeec0-45e4-11ea-922f-09012ff1aa8c/update
+  request:
+    body:
+      authorName: a different author 
+      releaseDate: 1580680415139 
+  response:
+    status: 200
+    body:
+      uuid: 913aeec0-45e4-11ea-922f-09012ff1aa8c
+      authorName: a different author 
+      releaseDate: 1580680415139 
+
+- name: fails to update a book item (invalid)
   endpoint:
     method: POST
     path: /books/add
